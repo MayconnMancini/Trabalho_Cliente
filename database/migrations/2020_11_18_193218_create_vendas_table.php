@@ -16,7 +16,8 @@ class CreateVendasTable extends Migration
         Schema::create('vendas', function (Blueprint $table) {
             $table->id();
             $table->string('data');
-            $table->string('nome_vendedor');
+            $table->string('nomeVendedor');
+            $table->double('valorTotal');
             $table->unsignedBigInteger('cliente_id');
             $table->foreign('cliente_id')->references('id')->on('clientes');
             $table->timestamps();
