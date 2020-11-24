@@ -39,23 +39,23 @@
             </thead>
             <tbody>
 
-                @foreach($clientes as $id)
+                @foreach($clientes as $c)
                 <tr>
                     <th scope="row">{{ $c->id}}</th>
                     <td>{{$c->nome}}</td>
                     <td>
-                        <form action="{{-- TODO --}}" method="POST">
+                        <form action="{{ route('clientes.destroy', $c->id) }}" method="POST"> 
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger btn-sm">
                                 Apagar
                             </button>                            
                             <a class="btn btn-primary btn-sm active" 
-                                href="{{-- TODO --}}">
+                                href="{{ route('clientes.show', $c->id) }}">
                                 Detalhes
                             </a>
                             <a class="btn btn-secondary btn-sm active" 
-                                href="{{-- TODO --}}">
+                                href="{{ route('clientes.edit',$c->id) }}">
                                 Editar
                             </a>
                         </form>

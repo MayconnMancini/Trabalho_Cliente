@@ -42,23 +42,35 @@ class ClienteController extends Controller
             [ 'nome' => [
                 'required',
                 'min:2',
-                Rule::unique('clientes')->ignore($clientes->id)
+                'unique:clientes'
             ],
+             'cpf' => [
+                'required', 
+                'min:2',
+                'unique:clientes'
+            ]
+            
             ],
 
             [ 
                 'nome.require' =>'Preencha o nome do Cliente',
                 'nome.min' => 'O nome nao tem mais que um caractere',
                 'nome.unique'=>'ja cadastrado',
+            ],
+            [
+                'cpf.require' =>'Campo CPF não preenchido',
+                'cpf.min' => 'Numero de caracteres Invalidos',
+                'cpf.unique'=>'cpf cadastrado',
             ]
 
         );
 
-        $clientes = new Cliente();
-        $clientes->nome = $request->nome;
-        $clientes->save();
+        $cliente = new Cliente();
+        $cliente->nome = $request->nome;
+        $cliente->cpf = $request->cpf;
+        $cliente->save();
 
-        return redirect()->route('cliente.index') ->with('msg_sucess', 'Cliente Cadastrado');
+        return redirect()->route('clientes.index')->with('msg_sucess', 'Cliente Cadastrado');
     
 
     }
@@ -71,7 +83,9 @@ class ClienteController extends Controller
      */
     public function show(Cliente $cliente)
     {
-        //
+        return view('clientes.show', 
+            compact(['cliente'])
+        );
     }
 
     /**
@@ -82,7 +96,10 @@ class ClienteController extends Controller
      */
     public function edit(Cliente $cliente)
     {
-        //
+        return view(
+            'clientes.edit', 
+            compact(['cliente'])
+        );   
     }
 
     /**
@@ -94,7 +111,38 @@ class ClienteController extends Controller
      */
     public function update(Request $request, Cliente $cliente)
     {
-        //
+        $request->validate(
+            [ 
+                'nome' => [
+                    'required',
+                    'min:2',
+                    Rule::unique('clientes')->ignore($cliente->id)
+                ],
+                'cpf' =>[
+                    'required',
+                    'min:2',
+                    Rule::unique('clientes')->ignore($cliente->id)
+                ]
+            ],
+            [
+              'nome.required' => 'O nome do Cliente é obrigatório'  ,
+              'nome.min' => 'O nome do Cliente deve ter no mínimo 2 letras'  ,
+              'nome.unique' => 'Este Cliente já está cadastrado'  ,
+            ],
+            [
+                'cpf.require' =>'Campo CPF não preenchido',
+                'cpf.min' => 'Numero de caracteres Invalidos',
+                'cpf.unique'=>'cpf cadastrado',
+            ]
+            
+        );
+
+        $cliente->nome = $request->nome;
+        $cliente->cpf = $request->cpf;
+        $cliente->save();
+
+        return redirect()->route('clientes.index')
+            ->with('msg_success', 'Cliente atualizado com sucesso');        
     }
 
     /**
@@ -105,6 +153,11 @@ class ClienteController extends Controller
      */
     public function destroy(Cliente $cliente)
     {
-        //
-    }
+        $cliente->delete();
+
+        return redirect()->route('clientes.index')
+            ->with('msg_success', 'Cliente removido com sucesso.');
+    }    
+
 }
+

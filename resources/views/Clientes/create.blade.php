@@ -9,27 +9,39 @@
     <div class="row">
         <div class="col-md-12" >
 
-            <form action="{{ route('clientes.store') }}" class="card p-2 my-4" method="POST">
+            <form action="{{ route('clientes.store') }}" class="form-row" method="POST">
                 @csrf
-                <div class="input-group">
+                <div class="col-7">
                     <input type="text" placeholder="Nome do Cliente" 
                         class="form-control" name="nome" required>
-                    <div class="input-group-append">
-                        <button type="submit" class="btn btn-primary">
-                            Salvar
-                        </button>
+                </div>
+                <div class="col">
+                    <input type="text" placeholder="CPF" 
+                        class="form-control" name="cpf" required>
+                </div>
+                <div class="col-7">
+                    <hr>
+                    <button type="submit" class="btn btn-primary">
+                        Salvar
+                    </button>
+                    <a href="{{ route('clientes.index')}}" 
+                        class="btn btn-secondary ml-1" role="button" aria-pressed="true">Cancelar</a>
+                </div>
+                <div class="col-7"> <!-- utilizado COL-7 para ficar uma linha abaixo -->
+                    @error("nome")
+                    <div class="alert alert-danger my-2" role="alert">
+                        {{ $message }}
                     </div>
+                        @enderror         
+                        @error("cpf")
+                    <div class="alert alert-danger my-2" role="alert">
+                        {{ $message }}
+                    </div>
+                    @enderror  
                 </div>
-                @error("nome")
-               <div class="alert alert-danger my-2" role="alert">
-                    {{ $message }}
-                </div>
-                @enderror         
             </form>
-            <a href="{{ route('clientes.index')}}" 
-            class="btn btn-secondary ml-1" role="button" aria-pressed="true">Cancelar</a>
-
         </div>
+
     </div>
 </div>
 
