@@ -92,9 +92,7 @@ class ClienteController extends Controller
      */
     public function edit(Cliente $cliente)
     {
-        return view(
-            'clientes.edit', 
-            compact(['cliente'])
+        return view('clientes.edit', compact(['cliente'])
         );   
     }
 
@@ -108,29 +106,26 @@ class ClienteController extends Controller
     public function update(Request $request, Cliente $cliente)
     {
         $request->validate(
-            [ 
-                'nome' => [
-                    'required',
-                    'min:2',
-                    Rule::unique('clientes')->ignore($cliente->id)
+            [ 'nome' => [
+                'required',
+                'min:2'
                 ],
-                'cpf' =>[
-                    'required',
-                    'min:2',
-                    Rule::unique('clientes')->ignore($cliente->id)
+             'cpf' => [
+                'required', 
+                'min:2',
+                Rule::unique('clientes')->ignore($cliente->id)
                 ]
             ],
-            [
-              'nome.required' => 'O nome do Cliente é obrigatório'  ,
-              'nome.min' => 'O nome do Cliente deve ter no mínimo 2 letras'  ,
-              'nome.unique' => 'Este Cliente já está cadastrado'  ,
-            ],
-            [
+
+            [ 
+                'nome.require' =>'Preencha o nome do Cliente',
+                'nome.min' => 'O nome nao tem mais que um caractere',
+          
                 'cpf.require' =>'Campo CPF não preenchido',
                 'cpf.min' => 'Numero de caracteres Invalidos',
                 'cpf.unique'=>'cpf cadastrado',
             ]
-            
+
         );
 
         $cliente->nome = $request->nome;

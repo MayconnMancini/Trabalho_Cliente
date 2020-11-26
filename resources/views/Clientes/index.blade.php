@@ -34,6 +34,7 @@
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Nome</th>
+                    <th scope="col">CPF</th>
                     <th scope="col">Ações</th>
                 </tr>
             </thead>
@@ -43,6 +44,7 @@
                 <tr>
                     <th scope="row">{{ $c->id}}</th>
                     <td>{{$c->nome}}</td>
+                    <td>{{$c->cpf}}</td>
                     <td>
                         <form action="{{ route('clientes.destroy', $c->id) }}" method="POST"> 
                             @csrf
