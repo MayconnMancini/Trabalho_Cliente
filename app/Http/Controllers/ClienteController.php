@@ -16,7 +16,7 @@ class ClienteController extends Controller
      */
     public function index()
     {
-        $clientes = Cliente::all();
+        $clientes = Cliente::all(); //
         return view('clientes.index', compact('clientes'));
     }
 
@@ -41,23 +41,19 @@ class ClienteController extends Controller
         $request->validate(
             [ 'nome' => [
                 'required',
-                'min:2',
-                'unique:clientes'
-            ],
+                'min:2'
+                ],
              'cpf' => [
                 'required', 
                 'min:2',
                 'unique:clientes'
-            ]
-            
+                ]
             ],
 
             [ 
                 'nome.require' =>'Preencha o nome do Cliente',
                 'nome.min' => 'O nome nao tem mais que um caractere',
-                'nome.unique'=>'ja cadastrado',
-            ],
-            [
+          
                 'cpf.require' =>'Campo CPF não preenchido',
                 'cpf.min' => 'Numero de caracteres Invalidos',
                 'cpf.unique'=>'cpf cadastrado',

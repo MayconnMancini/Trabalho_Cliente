@@ -10,7 +10,7 @@
         <div class="col-md-12" >
 
             <form action="{{ route('clientes.store') }}" class="form-row" method="POST">
-                @csrf
+                @csrf <!-- cria um token do formulario -->
                 <div class="col-7">
                     <input type="text" placeholder="Nome do Cliente" 
                         class="form-control" name="nome" required>
