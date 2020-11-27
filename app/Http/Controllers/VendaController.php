@@ -14,7 +14,8 @@ class VendaController extends Controller
      */
     public function index()
     {
-        //
+        $vendas = Venda::all();
+        return view('vendas.index', compact('vendas'));
     }
 
     /**
@@ -24,7 +25,7 @@ class VendaController extends Controller
      */
     public function create()
     {
-        //
+        return view('vendas.create');
     }
 
     /**

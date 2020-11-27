@@ -13,6 +13,7 @@
   <body>
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
         <a class="navbar-brand" href="{{ route('index') }}">Vendas</a>
         <button class="navbar-toggler" 
             type="button" data-toggle="collapse" data-target="#navbarText" 
@@ -28,14 +29,14 @@
                     <a class="nav-link" href="{{ route('produtos.index') }}">Produtos</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="">Vendas</a>
+                    <a class="nav-link" href="{{ route('vendas.index') }}">Vendas</a>
                 </li>
             </ul>
             <span class="navbar-text">
             </span>
         </div>
     </nav>  
-
+    </div><!-- fim container -->
     <main role="main">
         @yield('main')
     </main>
