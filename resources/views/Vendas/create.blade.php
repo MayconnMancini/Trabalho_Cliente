@@ -21,9 +21,12 @@
                     </div>
     
                     <div class="form-group col-md-4">
-                        <label for="nome">Cliente</label>
-                        <input type="text" class="form-control" id="cliente" 
-                            name="cliente" placeholder="Cliente" required>
+                    <label for="cliente">Cliente</label>
+                        <select name="cliente" class="form-control" id = "cliente">
+                            @foreach($clientes as $c)
+                                <option value="{{ $c->nome }}">{{ $c->nome }}</option>
+                            @endforeach
+                            </select> 
                     </div>
     
                     <div class="form-group col-md-2">
@@ -35,7 +38,7 @@
                     <div class="form-group col-md-2">
                         <label for="nome">Valor Total</label>
                         <input type="number" class="form-control" id="valorTotal" 
-                            name="valorTotal" readonly>
+                            name="valorTotal" value = "{{}}" readonly> 
                     </div>
     
                     <div class="form-group col-md-12">
@@ -53,8 +56,11 @@
 
                     <div class="form-group col-md-4">
                         <label for="produto">Selecione o produto</label>
-                        <input type="text" class="form-control" id="produto" 
-                            name="produto" placeholder="Produto" required>
+                        <select name="produto" class="form-control" id = "produto">
+                            @foreach($produtos as $p)
+                                <option value="{{ $p->nome }}" selected>{{ $p->nome }}</option>
+                            @endforeach
+                            </select> 
                     </div>
     
                     <div class="form-group col-md-4">
