@@ -79,9 +79,8 @@ class ClienteController extends Controller
      */
     public function show(Cliente $cliente)
     {
-        return view('clientes.show', 
-            compact(['cliente'])
-        );
+        $vendas = $cliente->vendas; // retorna todas as vendas desse cliente        
+        return view('clientes.show', compact(['cliente','vendas'])  );
     }
 
     /**

@@ -45,12 +45,12 @@
 
             @foreach($vendas as $v) 
                 <tr>
-                    <th scope="row">{{ $c->id}}</th>
-                    <td>{{$c->data}}</td>
-                    <td>{{$c->nomeVendedor}}</td>
-                    <td>{{$c->cliente}}</td>
-                    <td>{{$c->valorTotal}}</td>
-                    <td>{{$c->status}}</td>
+                    <th scope="row">{{ $v->id}}</th>
+                    <td>{{$v->data }}</td>
+                    <td>{{$v->nomeVendedor}}</td>
+                    <td>{{$v->cliente->nome}}</td>
+                    <td>{{$v->valorTotal}}</td>
+                    <td>{{$v->status}}</td>
                     <td>
                         <form action="{{ route('vendas.destroy', $v->id) }}" method="POST"> 
                             @csrf

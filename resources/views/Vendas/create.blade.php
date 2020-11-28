@@ -38,7 +38,7 @@
                     <div class="form-group col-md-2">
                         <label for="nome">Valor Total</label>
                         <input type="number" class="form-control" id="valorTotal" 
-                            name="valorTotal" value = "{{}}" readonly> 
+                            name="valorTotal" value = "" readonly> 
                     </div>
     
                     <div class="form-group col-md-12">
@@ -72,7 +72,7 @@
                     <div class="form-group col-md-4 d-flex align-items-end">
                      
                         <button type="submit" class="btn btn-success ">
-                            Adicionar na lista
+                            Adicionar ao carrinho
                         </button>
                 
                     </div>
@@ -100,7 +100,7 @@
             </form><!-- Fim form principal -->
 
 
-            <h3>Lista de produtos</h3><!-- inicio Lista de itens -->
+            <h3>Carrinho de compras</h3><!-- inicio Lista de itens -->
 
         
 
