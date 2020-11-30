@@ -188,41 +188,37 @@ class VendaController extends Controller
      * @param  \App\Models\Venda  $venda
      * @return \Illuminate\Http\Response
      */
-    public function destroy(int $id)
+    public function destroy(Venda $venda, int $id)
     {   
+        
+       
+
         if (isset($_POST['btn-excluir-item'])) {
 
-            $venda = Venda::find($id);
-
+            $venda->produtos()->detach($id);   
+            return redirect()->route('vendas.edit')
+            ->with('msg_success', 'Venda removido com sucesso.');
         }
 
-        $venda = Venda::find($id);
         
-        $venda->delete();
-
-        return redirect()->route('vendas.index')
-            ->with('msg_success', 'Venda removido com sucesso.');
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Venda  $venda
+     * @param  \App\Models\Produto  $produto
      * @return \Illuminate\Http\Response
      */
-    public function deleteItens(Venda $venda, int $id)
+    public function deleteItens(Venda $venda, Produto $produto)
     {   
-        if (isset($_POST['btn-excluir-item'])) {
-
-            $venda = Venda::find($id);
-            
-        }
-
-        $venda = Venda::find($id);
         
-        $venda->delete();
+        echo($venda->id);
+        echo($produto->id);
+        
+        $venda->produtos()->detach($produto->id);
 
-        return redirect()->route('vendas.index')
-            ->with('msg_success', 'Venda removido com sucesso.');
+        //return redirect()->route('vendas.index')
+          //  ->with('msg_success', 'Item removido com sucesso.');
     }
 }

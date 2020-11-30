@@ -6,10 +6,14 @@ use App\Http\Controllers\IndexController;
 use App\Http\Controllers\ProdutoController;
 use App\Http\Controllers\VendaController;
 
-//Route::get('vendas/{venda}/{id}', 'VendaController@deleteItens');
-Route::resource('vendas', VendaController::class);  // configura as rotas de venda
+Route::delete('/vendas/{venda}/edit/{produto}', [VendaController::class, 'deleteItens'])->name('vendas.deleteItens');
+
 Route::get('/', IndexController::class)->name('index'); // configura as rotas do /.
 Route::resource('clientes', ClienteController::class);  // configura as rotas de clientes.
 Route::resource('produtos', ProdutoController::class);  // configura as rotas de produtos
+
+Route::resource('vendas', VendaController::class);  // configura as rotas de venda
+
+
 
 

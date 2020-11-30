@@ -138,7 +138,7 @@
                     <td>{{$i->preco}}</td>
                     <td>{{$i->pivot->quantidade}}</td>
                     <td>
-                        <form action="{{ route('vendas.destroy', $i->id) }}" method="POST"> 
+                        <form action="{{ route('vendas.deleteItens', $venda->id, $i->id) }}" method="POST"> 
                             @csrf
                             @method('DELETE')
                             <button type="submit" name="btn-excluir-item"class="btn btn-danger btn-sm">
