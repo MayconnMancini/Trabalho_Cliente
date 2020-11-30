@@ -40,8 +40,60 @@ class VendaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        /*$request->validate(
+            [ 'nome' => [
+                'required',
+                'min:2'
+                ],
+             'cpf' => [
+                'required', 
+                'min:2',
+                'unique:clientes'
+                ]
+            ],
+
+            [ 
+                'nome.require' =>'Preencha o nome do Cliente',
+                'nome.min' => 'O nome nao tem mais que um caractere',
+          
+                'cpf.require' =>'Campo CPF não preenchido',
+                'cpf.min' => 'Numero de caracteres Invalidos',
+                'cpf.unique'=>'cpf cadastrado',
+            ]
+
+        ); */
+        if (isset($_POST['btn-finalizar-venda'])) {
+            $venda = new Venda();
+            $venda->data = date(now());
+            $venda->nomeVendedor = $request->nomeVendedor;
+            $venda->valorTotal = 0;
+            $venda->cliente_id = $request->cliente;
+            $venda->save();
+
+            return redirect()->route('vendas.index')->with('msg_sucess', 'Venda Cadastrada');
+        }
+        else if (isset($_POST['btn-adcionar-item'])) {
+
+            $venda = new Venda();
+            $venda->data = date(now());
+            $venda->nomeVendedor = $request->nomeVendedor;
+            $venda->valorTotal = $request->valorTotal;
+            $venda->cliente_id = $request->cliente;
+            $venda->save();
+            $id = $venda->id; // retorna o id da venda
+
+            $id_produto = $request->produto;
+            $quantidade = $request->quantidade;
+
+            $venda->produtos()->attach([$id_produto => ['quantidade' => $quantidade]]); // adiciona o produto na tabela
+                                                                                        // produto_venda
+
+            return redirect()->route('vendas.edit', $id)->with('msg_sucess', 'PASSEI PELO IF BTN ADCIONAR');
+        }
     }
+
+
+    
 
     /**
      * Display the specified resource.
@@ -62,8 +114,11 @@ class VendaController extends Controller
      */
     public function edit(Venda $venda)
     {
-        //
+        $produtos = Produto::all();
+        $clientes = Cliente::all();
+        return view('vendas.edit', compact(['venda','clientes','produtos']) );   
     }
+    
 
     /**
      * Update the specified resource in storage.

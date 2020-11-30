@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\Concerns\InteractsWithPivotTable;
 
 class Venda extends Model
 {
@@ -18,7 +19,7 @@ class Venda extends Model
 
     public function produtos()
     {
-        return $this->belongsToMany("App\Models\Produto");
+        return $this->belongsToMany("App\Models\Produto")->withPivot('quantidade');
     }
 
 

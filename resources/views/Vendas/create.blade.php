@@ -22,11 +22,13 @@
     
                     <div class="form-group col-md-4">
                     <label for="cliente">Cliente</label>
-                        <select name="cliente" class="form-control" id = "cliente">
+                        <select name="cliente" class="form-control" id = "cliente" required>
                             @foreach($clientes as $c)
-                                <option value="{{ $c->nome }}">{{ $c->nome }}</option>
+                                <option value="{{ $c->id }}">
+                                    {{ $c->nome }}
+                                </option>
                             @endforeach
-                            </select> 
+                        </select> 
                     </div>
     
                     <div class="form-group col-md-2">
@@ -38,12 +40,12 @@
                     <div class="form-group col-md-2">
                         <label for="nome">Valor Total</label>
                         <input type="number" class="form-control" id="valorTotal" 
-                            name="valorTotal" value = "" readonly> 
+                            name="valorTotal" value = "0" readonly> 
                     </div>
     
                     <div class="form-group col-md-12">
                       
-                        <button type="submit" class="btn btn-primary">
+                        <button type="submit" name="btn-finalizar-venda" class="btn btn-primary">
                             Salvar Venda
                         </button>
                             <a href="{{ route('vendas.index')}}" 
@@ -52,15 +54,18 @@
 
                 </div><!-- Fim 1 row -->
 
+               
                 <div class="form-row border p-3 mt-2"><!-- inicio 2 row -->
 
                     <div class="form-group col-md-4">
                         <label for="produto">Selecione o produto</label>
                         <select name="produto" class="form-control" id = "produto">
                             @foreach($produtos as $p)
-                                <option value="{{ $p->nome }}" selected>{{ $p->nome }}</option>
+                                <option value="{{ $p->id }}">
+                                    {{ $p->nome }}
+                                </option>
                             @endforeach
-                            </select> 
+                        </select> 
                     </div>
     
                     <div class="form-group col-md-4">
@@ -71,7 +76,7 @@
     
                     <div class="form-group col-md-4 d-flex align-items-end">
                      
-                        <button type="submit" class="btn btn-success ">
+                        <button type="submit" name="btn-adcionar-item" class="btn btn-success ">
                             Adicionar ao carrinho
                         </button>
                 
@@ -97,7 +102,7 @@
                     @enderror  
                 </div>
 
-            </form><!-- Fim form principal -->
+            </form> <!-- Inicio form principal -->
 
 
             <h3>Carrinho de compras</h3><!-- inicio Lista de itens -->
