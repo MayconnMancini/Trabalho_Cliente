@@ -213,12 +213,11 @@ class VendaController extends Controller
     public function deleteItens(Venda $venda, Produto $produto)
     {   
         
-        echo($venda->id);
-        echo($produto->id);
+        
         
         $venda->produtos()->detach($produto->id);
 
-        //return redirect()->route('vendas.index')
-          //  ->with('msg_success', 'Item removido com sucesso.');
+        return redirect()->route('vendas.index')
+            ->with('msg_success', 'Item removido com sucesso.');
     }
 }
