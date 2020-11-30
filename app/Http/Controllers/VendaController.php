@@ -116,7 +116,9 @@ class VendaController extends Controller
     {
         $produtos = Produto::all();
         $clientes = Cliente::all();
-        return view('vendas.edit', compact(['venda','clientes','produtos']) );   
+        $itens = $venda->produtos;
+        
+        return view('vendas.edit', compact(['venda','clientes','produtos','itens']) );   
     }
     
 
@@ -129,7 +131,55 @@ class VendaController extends Controller
      */
     public function update(Request $request, Venda $venda)
     {
-        //
+       /* $request->validate(
+            [ 'nome' => [
+                'required',
+                'min:2'
+                ],
+             'cpf' => [
+                'required', 
+                'min:2',
+                Rule::unique('clientes')->ignore($cliente->id)
+                ]
+            ],
+
+            [ 
+                'nome.require' =>'Preencha o nome do Cliente',
+                'nome.min' => 'O nome nao tem mais que um caractere',
+          
+                'cpf.require' =>'Campo CPF não preenchido',
+                'cpf.min' => 'Numero de caracteres Invalidos',
+                'cpf.unique'=>'cpf cadastrado',
+            ]
+
+        ); */
+        if (isset($_POST['btn-finalizar-venda'])) {
+            
+            $venda->data = date(now());
+            $venda->nomeVendedor = $request->nomeVendedor;
+            $venda->valorTotal = $request->valorTotal;
+            $venda->cliente_id = $request->cliente;
+            $venda->save();
+
+            return redirect()->route('vendas.index')->with('msg_sucess', 'Venda Cadastrada');
+        }
+
+        $venda->data = date(now());
+        $venda->nomeVendedor = $request->nomeVendedor;
+        $venda->valorTotal = $request->valorTotal;
+        $venda->cliente_id = $request->cliente;
+        $venda->save();
+
+        $id = $venda->id; // retorna o id da venda
+
+        $id_produto = $request->produto;
+        $quantidade = $request->quantidade;
+
+        $venda->produtos()->attach([$id_produto => ['quantidade' => $quantidade]]); // adiciona o produto na tabela
+                                                                                        // produto_venda
+        
+        return redirect()->route('vendas.edit', $id)->with('msg_sucess', 'PASSEI PELO IF BTN ADCIONAR');
+    
     }
 
     /**
@@ -138,8 +188,41 @@ class VendaController extends Controller
      * @param  \App\Models\Venda  $venda
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Venda $venda)
-    {
-        //
+    public function destroy(int $id)
+    {   
+        if (isset($_POST['btn-excluir-item'])) {
+
+            $venda = Venda::find($id);
+
+        }
+
+        $venda = Venda::find($id);
+        
+        $venda->delete();
+
+        return redirect()->route('vendas.index')
+            ->with('msg_success', 'Venda removido com sucesso.');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Models\Venda  $venda
+     * @return \Illuminate\Http\Response
+     */
+    public function deleteItens(Venda $venda, int $id)
+    {   
+        if (isset($_POST['btn-excluir-item'])) {
+
+            $venda = Venda::find($id);
+            
+        }
+
+        $venda = Venda::find($id);
+        
+        $venda->delete();
+
+        return redirect()->route('vendas.index')
+            ->with('msg_success', 'Venda removido com sucesso.');
     }
 }

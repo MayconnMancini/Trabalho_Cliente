@@ -79,7 +79,7 @@
                     <div class="form-group col-md-4">
                         <label for="quantidade">Quantidade</label>
                         <input type="number" class="form-control" id="quantidade" 
-                            name="quantidade" placeholder="quantidade" required>
+                            name="quantidade" placeholder="quantidade">
                     </div>
     
                     <div class="form-group col-md-4 d-flex align-items-end">
@@ -113,7 +113,48 @@
             </form> <!-- Inicio form principal -->
 
 
-            <h3>Carrinho de compras</h3><!-- inicio Lista de itens -->
+            <h3 class="mt-4 mb-4">Carrinho de compras</h3><!-- inicio Lista de itens -->
+
+    @if(count($itens)>0)
+    <div class="row">
+        <div class="col-md-12" >
+
+            <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Preco</th>
+                    <th scope="col">quantidade</th>
+                    <th scope="col">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+
+            @foreach($itens as $i) 
+                <tr>
+                    <th scope="row">{{ $i->id}}</th>
+                    <td>{{$i->nome }}</td>
+                    <td>{{$i->preco}}</td>
+                    <td>{{$i->pivot->quantidade}}</td>
+                    <td>
+                        <form action="{{ route('vendas.destroy', $i->id) }}" method="POST"> 
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" name="btn-excluir-item"class="btn btn-danger btn-sm">
+                                Apagar
+                            </button>                            
+                        </form>
+                    </td>
+                </tr>
+            @endforeach
+
+            </tbody>
+            </table>
+
+        </div>
+    </div>
+    @endif
 
     
 

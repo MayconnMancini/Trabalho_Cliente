@@ -20,7 +20,7 @@ class CreateProdutoVendaTable extends Migration
 
             $table->integer('quantidade');
 
-            $table->foreign('produto_id')->references('id')->on('produtos');
+            $table->foreign('produto_id')->references('id')->on('produtos')->onDelete('cascade');
             $table->foreign('venda_id')->references('id')->on('vendas')->onDelete('cascade');
             
             $table->primary(['produto_id','venda_id']);
