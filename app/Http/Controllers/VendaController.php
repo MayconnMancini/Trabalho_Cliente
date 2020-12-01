@@ -107,7 +107,7 @@ class VendaController extends Controller
      */
     public function show(Venda $venda)
     {
-        //
+        return redirect()->route('vendas.index');
     }
 
     /**
