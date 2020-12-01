@@ -62,6 +62,18 @@
 
                 </div><!-- Fim 1 row -->
 
+                @if (session('msg_success'))
+    <div class="alert alert-success" role="alert">
+        {{ session('msg_success') }}
+    </div>
+    @endif
+
+    @if (session('msg_error'))
+    <div class="alert alert-danger" role="alert">
+        {{ session('msg_error') }}
+    </div>
+    @endif
+
                
                 <div class="form-row border p-3 mt-2"><!-- inicio 2 row -->
 

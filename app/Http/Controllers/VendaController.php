@@ -9,6 +9,14 @@ use Illuminate\Http\Request;
 
 class VendaController extends Controller
 {
+
+    private function calcularVenda(Venda $venda) {
+
+        $itens = $venda->produtos;
+        $venda->valorTotal = $venda->calcularTotal($itens);
+        $venda->save();
+
+    }
     /**
      * Display a listing of the resource.
      *
@@ -63,14 +71,9 @@ class VendaController extends Controller
 
         ); */
         if (isset($_POST['btn-finalizar-venda'])) {
-            $venda = new Venda();
-            $venda->data = date(now());
-            $venda->nomeVendedor = $request->nomeVendedor;
-            $venda->valorTotal = 0;
-            $venda->cliente_id = $request->cliente;
-            $venda->save();
 
-            return redirect()->route('vendas.index')->with('msg_sucess', 'Venda Cadastrada');
+            return redirect()->route('vendas.create')->with('msg_error', 'Nenhum produto selecionado');
+
         }
         else if (isset($_POST['btn-adcionar-item'])) {
 
@@ -85,10 +88,11 @@ class VendaController extends Controller
             $id_produto = $request->produto;
             $quantidade = $request->quantidade;
 
-            $venda->produtos()->attach([$id_produto => ['quantidade' => $quantidade]]); // adiciona o produto na tabela
-                                                                                        // produto_venda
-
-            return redirect()->route('vendas.edit', $id)->with('msg_sucess', 'PASSEI PELO IF BTN ADCIONAR');
+            $venda->produtos()->attach([$id_produto => ['quantidade' => $quantidade]]); // adiciona o produto na tabela produto_venda
+            
+            $this->calcularVenda($venda);
+            
+            return redirect()->route('vendas.edit', $id)->with('msg_success', 'Item adcionado');
         }
     }
 
@@ -161,7 +165,9 @@ class VendaController extends Controller
             $venda->cliente_id = $request->cliente;
             $venda->save();
 
-            return redirect()->route('vendas.index')->with('msg_sucess', 'Venda Cadastrada');
+            $this->calcularVenda($venda);
+
+            return redirect()->route('vendas.index')->with('msg_success', 'Venda Cadastrada');
         }
 
         $venda->data = date(now());
@@ -175,10 +181,11 @@ class VendaController extends Controller
         $id_produto = $request->produto;
         $quantidade = $request->quantidade;
 
-        $venda->produtos()->attach([$id_produto => ['quantidade' => $quantidade]]); // adiciona o produto na tabela
-                                                                                        // produto_venda
+        $venda->produtos()->attach([$id_produto => ['quantidade' => $quantidade]]); // adiciona o produto na tabela produto_venda
+
+        $this->calcularVenda($venda);                                                                                  
         
-        return redirect()->route('vendas.edit', $id)->with('msg_sucess', 'PASSEI PELO IF BTN ADCIONAR');
+       return redirect()->route('vendas.edit', $id)->with('msg_success', 'Item adcionado');
     
     }
 
@@ -188,18 +195,13 @@ class VendaController extends Controller
      * @param  \App\Models\Venda  $venda
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Venda $venda, int $id)
+    public function destroy(Venda $venda)
     {   
+     
+        $venda->delete();   
         
-       
-
-        if (isset($_POST['btn-excluir-item'])) {
-
-            $venda->produtos()->detach($id);   
-            return redirect()->route('vendas.edit')
-            ->with('msg_success', 'Venda removido com sucesso.');
-        }
-
+        return redirect()->route('vendas.index')   
+        ->with('msg_success', 'Venda removido com sucesso.');
         
     }
 
@@ -213,11 +215,11 @@ class VendaController extends Controller
     public function deleteItens(Venda $venda, Produto $produto)
     {   
         
-        
-        
         $venda->produtos()->detach($produto->id);
 
-        return redirect()->route('vendas.index')
+        $this->calcularVenda($venda);  
+
+        return redirect()->route('vendas.edit', $venda->id)
             ->with('msg_success', 'Item removido com sucesso.');
     }
 }
