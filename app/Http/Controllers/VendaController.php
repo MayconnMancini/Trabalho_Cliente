@@ -107,7 +107,9 @@ class VendaController extends Controller
      */
     public function show(Venda $venda)
     {
-        //
+        $itens = $venda->produtos;
+        
+        return view('vendas.show', compact(['venda','itens']) );  
     }
 
     /**
