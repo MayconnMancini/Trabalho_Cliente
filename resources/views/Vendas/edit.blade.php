@@ -138,6 +138,7 @@
                     <th scope="col">Nome</th>
                     <th scope="col">Preco</th>
                     <th scope="col">quantidade</th>
+                    <th scope="col">Subtotal</th>
                     <th scope="col">Ações</th>
                 </tr>
             </thead>
@@ -149,6 +150,7 @@
                     <td>{{$i->nome }}</td>
                     <td>{{$i->preco}}</td>
                     <td>{{$i->pivot->quantidade}}</td>
+                    <td>{{$i->preco * $i->pivot->quantidade}}</td>
                     <td>
                         <form action="{{ route('vendas.deleteItens', ['venda' => $venda->id, 'produto' => $i->id]) }}" method="POST"> 
                             @csrf
