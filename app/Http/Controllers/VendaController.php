@@ -109,7 +109,7 @@ class VendaController extends Controller
     {
         $itens = $venda->produtos;
         
-        return view('vendas.show', compact(['venda','itens']) );  
+        return view('vendas.show', compact(['venda','itens']) );
     }
 
     /**
