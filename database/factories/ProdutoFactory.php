@@ -23,8 +23,8 @@ class ProdutoFactory extends Factory
     {
         return [
             //'id'=>$this->faker->randomDigit,
-            'nome'=> $this->faker->unique()->name,
-            'preco'=> $this->faker->randomFloat($nbMaxDecimals=3),
+            'nome'=> $this->faker->unique()->word,
+            'preco'=> $this->faker->randomFloat($nbMaxDecimals = 2, $min = 0, $max = 100),
             'estoque'=> $this->faker->randomDigit
         ];
     }
