@@ -48,7 +48,6 @@
                 <div class="form-group col-md-2">
                     <label>Valor Total:</label>     
                     <input type="text" name="preco" id="currency" class="form-control"  
-                    data-thousands="." data-decimal="," data-prefix="R$ "  
                     value="R$ {{ $venda->valorTotal }}" readonly>
                 </div>
                 

@@ -91,7 +91,7 @@
                     <div class="form-group col-md-4">
                         <label for="quantidade">Quantidade</label>
                         <input type="number" class="form-control" id="quantidade" 
-                            name="quantidade" placeholder="quantidade">
+                            name="quantidade" placeholder="quantidade" min="1" value="1">
                     </div>
     
                     <div class="form-group col-md-4 d-flex align-items-end">

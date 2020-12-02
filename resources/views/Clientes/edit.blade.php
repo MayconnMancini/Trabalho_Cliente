@@ -15,21 +15,30 @@
                 @csrf
                 @method('PUT')
 
-                <div class="input-group">
-                    <input type="text" placeholder="Nome do Cliente" 
-                        value="{{ $cliente->nome }}"
-                        class="form-control" name="nome" required>
-                        
-                    <input type="text" placeholder="CPF do Cliente" 
-                        value="{{ $cliente->cpf }}"
-                        class="form-control" name="cpf" required>
-
-                    <div class="input-group-append">
-                        <button type="submit" class="btn btn-primary">
-                            Salvar
-                        </button>
+                <div class="form-row  p-3 mt-2">
+                    <div class="form-group col-md-4">
+                        <label for="nome">Nome do Cliente</label>
+                        <input type="text" class="form-control" id="nome" 
+                            name="nome" placeholder="Vendedor" 
+                            value="{{ $cliente->nome }}" required>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="cpf">CPF</label>
+                        <input type="text" class="form-control" id="cpf" 
+                            name="cpf" placeholder="cpf" 
+                            value="{{ $cliente->cpf}}" required>
                     </div>
                 </div>
+
+                <div class="form-group col-md-12">
+                      
+                    <button type="submit" class="btn btn-primary">
+                        Salvar
+                    </button>
+                    <a href="{{ route('clientes.index')}}" 
+                        class="btn btn-secondary ml-1" role="button" aria-pressed="true">Cancelar</a>
+                </div>
+
                 @error("nome")
                 <div class="alert alert-danger my-2" role="alert">
                     {{ $message }}
@@ -42,8 +51,7 @@
                 </div>
                 @enderror
             </form>
-            <a href="{{ route('clientes.index') }}" 
-            class="btn btn-secondary ml-1" role="button" aria-pressed="true">Cancelar</a>
+            
         </div>
     </div>
 </div>
