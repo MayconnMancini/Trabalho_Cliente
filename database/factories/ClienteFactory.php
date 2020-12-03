@@ -24,7 +24,7 @@ class ClienteFactory extends Factory
         return [
                 //'id'=>$this->faker->randomDigit,
                 'nome'=> $this->faker->unique()->name,
-                'cpf'=> $this->faker->regexify('[0-9]{' . mt_rand(12,12) . '}'),
+                'cpf'=> $this->faker->regexify('[0-9]{' . mt_rand(11,11) . '}'),
             ];
 
     }

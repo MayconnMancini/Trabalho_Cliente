@@ -4,33 +4,55 @@
 
 <div class="container">
   <div class="py-5 text-center">
-    <h2>Vendas</h2>
+    <h2>Dashboard</h2>
   </div>
   <div class="row">
 
     
-    <div class="col-md-3" >
-      <h3>Cliente</h3>
-      {{-- TODO --}}
+    <div class="col-md-4" >
+      <h3>Vendas</h3>
+
+      @if(count($vendas)>0)
+        <ul>
+          @foreach($vendas as $v)
+            <li>
+              [{{ $v->id }}] - {{ $v->nomeVendedor }}
+            </li>
+          @endforeach
+        </ul>
+      @endif
     </div>
 
     
-    <div class="col-md-3" >
-      <h3>Produto</h3>
-      {{-- TODO --}}
+    <div class="col-md-4" >
+      <h3>Clientes</h3>
+      
+      @if(count($clientes)>0)
+        <ul>
+          @foreach($clientes as $c)
+            <li>
+              [{{ $c->id }}] - {{ $c->nome }}
+            </li>
+          @endforeach
+        </ul>
+      @endif
     </div>
 
 
-    <div class="col-md-3" >
-      <h3>Data</h3>
-      {{-- TODO --}}
+    <div class="col-md-4" >
+      <h3>Produtos</h3>
+      @if(count($produtos)>0)
+        <ul>
+          @foreach($produtos as $p)
+            <li>
+              [{{ $p->id }}] - {{ $p->nome }}
+            </li>
+          @endforeach
+        </ul>
+      @endif
     </div>
 
 
-    <div class="col-md-3" >
-      <h3>Nome do Vendedor</h3>
-      {{-- TODO --}}
-    </div>
 
   </div>
 </div>

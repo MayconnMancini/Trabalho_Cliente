@@ -55,16 +55,16 @@
                 </div><!-- Fim 1 row -->
 
                 @if (session('msg_success'))
-    <div class="alert alert-success" role="alert">
-        {{ session('msg_success') }}
-    </div>
-    @endif
-
-    @if (session('msg_error'))
-    <div class="alert alert-danger" role="alert">
-        {{ session('msg_error') }}
-    </div>
-    @endif
+                <div class="alert alert-success" role="alert">
+                    {{ session('msg_success') }}
+                </div>
+                @endif
+            
+                @if (session('msg_error'))
+                <div class="alert alert-danger" role="alert">
+                    {{ session('msg_error') }}
+                </div>
+                @endif
 
                
                 <div class="form-row border p-3 mt-2"><!-- inicio 2 row -->
@@ -97,21 +97,16 @@
                 </div><!-- Fim 2 row -->
 
                 <div class="col-md-12"> <!-- utilizado COL-7 para ficar uma linha abaixo -->
-                    @error("nome")
+                    @error("nomeVendedor")
                     <div class="alert alert-danger my-2" role="alert">
                         {{ $message }}
                     </div>
                     @enderror         
-                    @error("preco")
+                    @error("quantidade")
                     <div class="alert alert-danger my-2" role="alert">
                         {{ $message }}
                     </div>
-                    @enderror  
-                    @error("estoque")
-                    <div class="alert alert-danger my-2" role="alert">
-                        {{ $message }}
-                    </div>
-                    @enderror  
+                    @enderror   
                 </div>
 
             </form> <!-- Inicio form principal -->
