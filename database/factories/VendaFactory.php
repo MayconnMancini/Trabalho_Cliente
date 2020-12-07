@@ -14,7 +14,7 @@ class VendaFactory extends Factory
 
     public function definition()
     {
-
+        
         return [
             'nomeVendedor'=> $this->faker->unique()->name,
             'valorTotal' => 0,

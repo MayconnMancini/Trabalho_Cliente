@@ -180,9 +180,10 @@ class VendaController extends Controller
 
             $this->calcularVenda($venda);
 
-            return redirect()->route('vendas.index')->with('msg_success', 'Venda Cadastrada');
+            return redirect()->route('vendas.index')->with('msg_success', 'Venda Salva com sucesso');
         }
 
+        // entra nesse bloco se foi clicado o botão de adicionar item
         $venda->data = date("d/m/y H:i:s");
         $venda->nomeVendedor = $request->nomeVendedor;
         $venda->valorTotal = $request->valorTotal;
@@ -195,11 +196,19 @@ class VendaController extends Controller
         $quantidade = $request->quantidade;
 
         // adiciona o produto na tabela produto_venda
-        $venda->produtos()->attach([$id_produto => ['quantidade' => $quantidade]]); 
 
-        $this->calcularVenda($venda);                                                                                  
-        
-       return redirect()->route('vendas.edit', $id)->with('msg_success', 'Item adcionado');
+        try {
+
+            $venda->produtos()->attach([$id_produto => ['quantidade' => $quantidade]]);
+            $this->calcularVenda($venda);  
+            return redirect()->route('vendas.edit', $id)->with('msg_success', 'Item adcionado');
+
+        } catch (\Exception $e) {
+
+            return redirect()->route('vendas.edit', $id)
+            ->with('msg_error', 'E R R O !! Este item ja foi adicionado ao carrinho: -  ' . $e->getMessage());
+        }
+
     
     }
 

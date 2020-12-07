@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Cliente;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
-
+use PhpParser\Node\Stmt\TryCatch;
 
 class ClienteController extends Controller
 {
@@ -142,11 +142,22 @@ class ClienteController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy(Cliente $cliente)
-    {
-        $cliente->delete();
+    {   
+        try {
 
-        return redirect()->route('clientes.index')
+            $cliente->delete();
+
+             return redirect()->route('clientes.index')
             ->with('msg_success', 'Cliente removido com sucesso.');
+        } catch (\Exception $e) {
+
+            return redirect()->route('clientes.index')
+            ->with('msg_error', 'E R R O !! Existem vendas associadas à este cliente: -  ' . $e->getMessage());
+        }
+
+
+        
+        
     }    
 
 }

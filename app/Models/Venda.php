@@ -29,7 +29,6 @@ class Venda extends Model
         $total = 0;
 
         foreach($itens as $i) {
-
            
             $total = $total + ($i->preco * $i->pivot->quantidade);
 

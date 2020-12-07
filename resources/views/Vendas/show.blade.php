@@ -50,9 +50,12 @@
                     <input type="text" name="preco" id="currency" class="form-control"  
                     value="R$ {{ $venda->valorTotal }}" readonly>
                 </div>
-                
-                
 
+            </div>
+
+            <div class="table mt-2">
+                <a href="{{ route('vendas.index') }}" 
+                    class="btn btn-primary" role="button" aria-pressed="true">Voltar</a>
             </div>
 
             <h3 class="mt-4 mb-4">Carrinho de compras</h3><!-- inicio Lista de itens -->

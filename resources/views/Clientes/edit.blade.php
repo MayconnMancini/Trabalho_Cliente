@@ -24,7 +24,7 @@
                     </div>
                     <div class="form-group col-md-4">
                         <label for="cpf">CPF</label>
-                        <input type="text" class="form-control" id="cpf" 
+                        <input type="number" class="form-control" id="cpf" 
                             name="cpf" placeholder="cpf" 
                             value="{{ $cliente->cpf}}" required>
                     </div>

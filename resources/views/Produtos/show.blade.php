@@ -4,7 +4,7 @@
 
 <div class="container">
     <div class="py-5 text-center">
-        <h2>Cliente</h2>
+        <h2>Produto</h2>
     </div>
 
     <table class="table">
@@ -20,7 +20,7 @@
         <tr>
             <th scope="row">{{ $produto->id }}</th>
             <td>  {{ $produto->nome }}</td>
-            <td> {{ $produto->preco }}</td>
+            <td> R$ {{ $produto->preco }}</td>
             <td> {{ $produto->estoque }}</td>
         </tr>
     </table>

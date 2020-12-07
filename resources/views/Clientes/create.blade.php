@@ -16,7 +16,7 @@
                         class="form-control" name="nome" required>
                 </div>
                 <div class="col">
-                    <input type="text" placeholder="CPF" 
+                    <input type="number" placeholder="CPF" 
                         class="form-control" name="cpf" required>
                 </div>
                 <div class="col-7">

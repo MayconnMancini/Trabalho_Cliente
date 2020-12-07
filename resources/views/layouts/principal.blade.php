@@ -8,13 +8,13 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 
-    <title>Vendas</title>
+    <title>Controle de Vendas</title>
   </head>
   <body>
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
-        <a class="navbar-brand" href="{{ route('index') }}">Vendas</a>
+        <a class="navbar-brand" href="{{ route('index') }}">Dashboard</a>
         <button class="navbar-toggler" 
             type="button" data-toggle="collapse" data-target="#navbarText" 
             aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
